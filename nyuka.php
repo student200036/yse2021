@@ -26,9 +26,11 @@ if (/* ③の処理を書く */){
 	//⑤ログイン画面へ遷移する。
 }
 
+$username = "zaiko2021_yse";
+$password = "2021zaiko";
 
 //⑥データベースへ接続し、接続情報を変数に保存する
-$pdo = new PDO($dsn, $username, $password, $driver)
+$pdo = new PDO($dsn, $username, $password)
 //⑦データベースで使用する文字コードを「UTF8」にする
 $dbh = new PDO("mysql:")
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
