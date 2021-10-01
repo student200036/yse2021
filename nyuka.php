@@ -14,8 +14,9 @@
  * ①session_status()の結果が「PHP_SESSION_NONE」と一致するか判定する。
  * 一致した場合はif文の中に入る。
  */
-if (/* ①.の処理を行う */) {
+if (/* ①の処理を書く */ session_status() == PHP_SESSION_NONE) {
 	//②セッションを開始する
+	session_start();
 }
 
 
@@ -25,8 +26,9 @@ if (/* ③の処理を書く */){
 	//⑤ログイン画面へ遷移する。
 }
 
-//⑥データベースへ接続し、接続情報を変数に保存する
 
+//⑥データベースへ接続し、接続情報を変数に保存する
+$pdo = new PDO($dsn, $username, $password, $driver)
 //⑦データベースで使用する文字コードを「UTF8」にする
 
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
