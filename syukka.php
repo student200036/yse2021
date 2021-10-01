@@ -23,7 +23,7 @@ if (/* ③の処理を書く */){
 	//④SESSIONの「error2」に「ログインしてください」と設定する。
 	$_SESSION['error2'] ="ログインしてください";
 	//⑤ログイン画面へ遷移する。
-	header('Location: login.php')
+	header('Location: login.php');
 }
 
 //⑥データベースへ接続し、接続情報を変数に保存する
