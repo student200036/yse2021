@@ -15,12 +15,15 @@
  */
 if (/* ①の処理を行う */) {
 	//②セッションを開始する
+	session_start();
 }
 
 //③SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
 if (/* ③の処理を書く */){
 	//④SESSIONの「error2」に「ログインしてください」と設定する。
+	$_SESSION['error2'] ="ログインしてください";
 	//⑤ログイン画面へ遷移する。
+	header('Location: login.php')
 }
 
 //⑥データベースへ接続し、接続情報を変数に保存する
@@ -74,8 +77,9 @@ function getId($id,$con){
 		 * ⑬SESSIONの「error」にメッセージが設定されているかを判定する。
 		 * 設定されていた場合はif文の中に入る。
 		 */ 
-		if(/* ⑬の処理を書く */){
+		if($_SESSION['error']){
 			//⑭SESSIONの「error」の中身を表示する。
+
 		}
 		?>
 		</div>
