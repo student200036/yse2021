@@ -14,8 +14,8 @@
 //⑥セッションを開始する
 // session_start();
 //①名前とパスワードを入れる変数を初期化する
-$name=null;
-$password=null;
+$name='';
+$password='';
 $message='';
 /*
  * ②ログインボタンが押されたかを判定する。
@@ -26,7 +26,7 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 	 * ③名前とパスワードが両方とも入力されているかを判定する。
 	 * 入力されていた場合はif文の中の処理を行う。
 	 */
-	if (isset($name) && isset($password)) {
+	if ($name!='' && $password!='') {
 		//④名前とパスワードにPOSTで送られてきた名前とパスワードを設定する
 		$_POST['name']=$name;
 		$_POST['pass']=$password;
