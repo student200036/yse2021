@@ -85,5 +85,7 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 			</p>
 		</form>
 	</div>
+	<?= var_dump($_POST['name'])?>
+	<?= var_dump($_POST['pass'])?>
 </body>
 </html>
