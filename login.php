@@ -14,8 +14,8 @@
 //⑥セッションを開始する
 // session_start();
 //①名前とパスワードを入れる変数を初期化する
-$name='';
-$password='';
+$name=null;
+$password=null;
 $message='';
 /*
  * ②ログインボタンが押されたかを判定する。
