@@ -26,7 +26,7 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 	 * ③名前とパスワードが両方とも入力されているかを判定する。
 	 * 入力されていた場合はif文の中の処理を行う。
 	 */
-	if (isset($name) && isset($password)) {
+	if (isset($_POST['name']) && isset($_POST['pass'])) {
 		//④名前とパスワードにPOSTで送られてきた名前とパスワードを設定する
 		$name=$_POST['name'];
 		$password=$_POST['pass'];
@@ -76,8 +76,7 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 				<input type='text' name="name" size='5' placeholder="Username">
 			</p>
 			<p>
-				<input type='password' name='pass' size='5' maxlength='20'
-					placeholder="Password">
+				<input type='password' name='pass' size='5' maxlength='20' placeholder="Password">
 			</p>
 			<p>
 				<button type="submit" formmethod="POST" name="decision" value="1"
