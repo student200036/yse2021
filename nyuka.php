@@ -30,7 +30,7 @@ if (/* ③の処理を書く */){
 //⑥データベースへ接続し、接続情報を変数に保存する
 $pdo = new PDO($dsn, $username, $password, $driver)
 //⑦データベースで使用する文字コードを「UTF8」にする
-
+$dbh = new PDO("mysql:")
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
 if(/* ⑧の処理を行う */){
 	//⑨SESSIONの「success」に「入荷する商品が選択されていません」と設定する。
