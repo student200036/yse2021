@@ -23,6 +23,14 @@
 //⑥データベースで使用する文字コードを「UTF8」にする
 
 //⑦書籍テーブルから書籍情報を取得するSQLを実行する。また実行結果を変数に保存する
+session_start();
+$_SESSION['login'] = $login;
+$_SESSION['error2'] = $error2;
+if($_SESSION['login'] == false){
+    $_SESSION['error2'] = 'ログインしてください';
+    header('Location: login.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
