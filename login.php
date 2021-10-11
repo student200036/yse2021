@@ -17,6 +17,7 @@ session_start();
 $name='';
 $password='';
 $message='';
+$error_message='';
 /*
  * ②ログインボタンが押されたかを判定する。
  * 押されていた場合はif文の中の処理を行う
@@ -52,10 +53,12 @@ if (!empty($name)) {
 }
 
 //⑫SESSIONの「error2」に値が入っているか判定する。入っていた場合はif文の中に入る
-// if (/* ⑫の処理を書く */) {
-// 	//⑬SESSIONの「error2」の値をエラーメッセージを入れる変数に設定する。
-// 	//⑭SESSIONの「error2」にnullを入れる。
-// }
+ if (!empty($_SESSION['error2'])) {
+	//⑬SESSIONの「error2」の値をエラーメッセージを入れる変数に設定する。
+	$error_message=$_SESSION['error2'];
+	//⑭SESSIONの「error2」にnullを入れる。
+	$_SESSION['error2']=null;
+ }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -69,7 +72,7 @@ if (!empty($name)) {
 		<h1>ログイン</h1>
 		<?php
 		//⑮エラーメッセージの変数に入っている値を表示する
-		//echo "<div id='error'>", /* ⑮の変数を書く */, "</div>";
+		echo "<div id='error'>",$error_message, "</div>";
 		
 		//⑯メッセージの変数に入っている値を表示する
 		echo "<div id='msg'>", $message, "</div>";
