@@ -17,6 +17,7 @@ session_start();
 $name='';
 $password='';
 $message='';
+$error_message='';
 /*
  * ②ログインボタンが押されたかを判定する。
  * 押されていた場合はif文の中の処理を行う
@@ -37,22 +38,27 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 }
 
 //⑦名前が入力されているか判定する。入力されていた場合はif文の中に入る
-// if (/* ⑦の処理を書く */) {
-// 	//⑧名前に「yse」、パスワードに「2021」と設定されているか確認する。設定されていた場合はif文の中に入る
-// 	if (/* ⑧の処理を書く */){
-// 		//⑨SESSIONに名前を設定し、SESSIONの「login」フラグをtrueにする
-// 		//⑩在庫一覧画面へ遷移する
-// 		header(/* ⑩の遷移先を書く */);
-// 	}else{
-// 		//⑪名前もしくはパスワードが間違っていた場合は、「ユーザー名かパスワードが間違っています」という文言をメッセージを入れる変数に設定する
-// 	}
-// }
+if (!empty($name)) {
+	//⑧名前に「yse」、パスワードに「2021」と設定されているか確認する。設定されていた場合はif文の中に入る
+	if ($name=='yse' && $password=='2021'){
+		//⑨SESSIONに名前を設定し、SESSIONの「login」フラグをtrueにする
+		session_name('LoginSession');
+		$_SESSION['login']=true;
+		//⑩在庫一覧画面へ遷移する
+		header('Location: zaiko_ichiran.php');
+	}else{
+		//⑪名前もしくはパスワードが間違っていた場合は、「ユーザー名かパスワードが間違っています」という文言をメッセージを入れる変数に設定する
+		$message='ユーザー名かパスワードが間違っています';
+	}
+}
 
 //⑫SESSIONの「error2」に値が入っているか判定する。入っていた場合はif文の中に入る
-// if (/* ⑫の処理を書く */) {
-// 	//⑬SESSIONの「error2」の値をエラーメッセージを入れる変数に設定する。
-// 	//⑭SESSIONの「error2」にnullを入れる。
-// }
+ if (!empty($_SESSION['error2'])) {
+	//⑬SESSIONの「error2」の値をエラーメッセージを入れる変数に設定する。
+	$error_message=$_SESSION['error2'];
+	//⑭SESSIONの「error2」にnullを入れる。
+	$_SESSION['error2']=null;
+ }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -66,7 +72,7 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 		<h1>ログイン</h1>
 		<?php
 		//⑮エラーメッセージの変数に入っている値を表示する
-		//echo "<div id='error'>", /* ⑮の変数を書く */, "</div>";
+		echo "<div id='error'>",$error_message, "</div>";
 		
 		//⑯メッセージの変数に入っている値を表示する
 		echo "<div id='msg'>", $message, "</div>";

@@ -25,14 +25,14 @@ if (/* ③の処理を書く */){
 	//④SESSIONの「error2」に「ログインしてください」と設定する。
 	//⑤ログイン画面へ遷移する。
 }
-
+$dsn = "zaiko2021_yse";
 $username = "zaiko2021_yse";
 $password = "2021zaiko";
 
 //⑥データベースへ接続し、接続情報を変数に保存する
 $pdo = new PDO($dsn, $username, $password)
 //⑦データベースで使用する文字コードを「UTF8」にする
-$dbh = new PDO("mysql:")
+$dbh = new PDO("mysql:host=localhost;dbname=$dsn;", $username, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
 if(/* ⑧の処理を行う */){
 	//⑨SESSIONの「success」に「入荷する商品が選択されていません」と設定する。
@@ -45,6 +45,8 @@ function getId($id,$con){
 	 * その際にWHERE句でメソッドの引数の$idに一致する書籍のみ取得する。
 	 * SQLの実行結果を変数に保存する。
 	 */
+	SELECT
+	
 
 	//⑫実行した結果から1レコード取得し、returnで値を返す。
 }
