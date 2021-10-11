@@ -31,6 +31,8 @@ if($_SESSION['login'] == false){
     header('Location: login.php');
     exit;
 }
+//
+//$pdo = new PDO('mysql:dbname=zaiko2021_yse;host=127.0.0.1;','kouhei-sugahara','')
 ?>
 <!DOCTYPE html>
 <html lang="ja">
