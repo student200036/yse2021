@@ -42,10 +42,10 @@ try{
 	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 }catch (PDOException $e) {
 	echo "接続失敗" . $e->getMessage();
+	exit;
 }
 
 //⑦データベースで使用する文字コードを「UTF8」にする
-$dbh = new PDO("mysql:host=localhost;dbname=$dsn;", $db_user, $db_password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
 if(empty($_POST['books'])){
 	//⑨SESSIONの「success」に「入荷する商品が選択されていません」と設定する。
@@ -61,8 +61,6 @@ function getId($id,$con){
 	 * その際にWHERE句でメソッドの引数の$idに一致する書籍のみ取得する。
 	 * SQLの実行結果を変数に保存する。
 	 */
-	$pdo2 = new PDO('mysql:host=localhost;dbname=$dsn;charset=utf8',$db_user,$db_password);
-	$sql = "SELECT * FROM zaiko2021_yse WHERE id = $id";
 	
 
 	//⑫実行した結果から1レコード取得し、returnで値を返す。
@@ -77,12 +75,12 @@ function getId($id,$con){
 <html lang="ja">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>入荷</title>
+	<title>入荷</title>="header">
 	<link rel="stylesheet" href="css/ichiran.css" type="text/css" />
 </head>
 <body>
 	<!-- ヘッダ -->
-	<div id="header">
+	<div id
 		<h1>入荷</h1>
 	</div>
 
@@ -99,7 +97,7 @@ function getId($id,$con){
 		<div id="pagebody">
 			<!-- エラーメッセージ -->
 			<div id="error">
-			
+			<?php
 			/*
 			 * ⑬SESSIONの「error」にメッセージが設定されているかを判定する。
 			 * 設定されていた場合はif文の中に入る。
@@ -107,7 +105,7 @@ function getId($id,$con){
 			// if(/* ⑬の処理を書く */){
 				//⑭SESSIONの「error」の中身を表示する。
 			// }
-			<?php
+			
 
 			?>
 
@@ -129,23 +127,24 @@ function getId($id,$con){
 					/*
 					 * ⑮POSTの「books」から一つずつ値を取り出し、変数に保存する。
 					 */
-    				// foreach(/* ⑮の処理を書く */){
-
+    				foreach($_POST['books'] as $books){
+						$_SESSION['books'] = $books;
+						$book = getId($books,$pdo);
     					// ⑯「getId」関数を呼び出し、変数に戻り値を入れる。その際引数に⑮の処理で取得した値と⑥のDBの接続情報を渡す。
 					?>
 					<?php //foreach ($_POST['books'] as $book_id):?>
 					<input type="hidden" value="<?= $book['id'] ?>" name="books[]"> 
 					<tr>
-						<!-- <td><?php echo	/* ⑱ ⑯の戻り値からidを取り出し、表示する */;?></td> -->
-						<!-- <td><?php echo	/* ⑲ ⑯の戻り値からtitleを取り出し、表示する */;?></td> -->
-						<!-- <td><?php echo	/* ⑳ ⑯の戻り値からauthorを取り出し、表示する */;?></td> -->
-						<!-- <td><?php echo	/* ㉑ ⑯の戻り値からsalesDateを取り出し、表示する */;?></td> -->
-						<!-- <td><?php echo	/* ㉒ ⑯の戻り値からpriceを取り出し、表示する */;?></td> -->
-						<!-- <td><?php echo	/* ㉓ ⑯の戻り値からstockを取り出し、表示する */;?></td> -->
-						<!-- <td><input type='text' name='stock[]' size='5' maxlength='11' required></td> -->
+						<td><?php echo $book['id']	/* ⑱ ⑯の戻り値からidを取り出し、表示する */;?></td> 
+						<td><?php echo $book['title']	/* ⑲ ⑯の戻り値からtitleを取り出し、表示する */;?></td> 
+						<td><?php echo $book['author']	/* ⑳ ⑯の戻り値からauthorを取り出し、表示する */;?></td> 
+						<td><?php echo $book['salesDate']	/* ㉑ ⑯の戻り値からsalesDateを取り出し、表示する */;?></td> 
+						<td><?php echo $book['price']	/* ㉒ ⑯の戻り値からpriceを取り出し、表示する */;?></td> 
+						<td><?php echo $book['stock']	/* ㉓ ⑯の戻り値からstockを取り出し、表示する */;?></td> 
+						<td><input type='text' name='stock[]' size='5' maxlength='11' required></td> 
 					</tr>
 					<?php
-					 //}
+					}
 					?>
 				</table>
 				<button type="submit" id="kakutei" formmethod="POST" name="decision" value="1">確定</button>
