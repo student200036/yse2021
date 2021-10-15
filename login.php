@@ -14,7 +14,7 @@
 //⑥セッションを開始する
 session_start();
 //①名前とパスワードを入れる変数を初期化する
-$name='';
+$user_name='';
 $password='';
 $message='';
 $error_message='';
@@ -29,7 +29,7 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 	 */
 	if (!empty($_POST['name']) && !empty($_POST['pass'])) {
 		//④名前とパスワードにPOSTで送られてきた名前とパスワードを設定する
-		$name=$_POST['name'];
+		$user_name=$_POST['name'];
 		$password=$_POST['pass'];
 	} else {
 	 	//⑤名前かパスワードが入力されていない場合は、「名前かパスワードが未入力です」という文言をメッセージを入れる変数に設定する
@@ -38,9 +38,9 @@ if (isset($_POST['decision']) && $_POST['decision']==1) {
 }
 
 //⑦名前が入力されているか判定する。入力されていた場合はif文の中に入る
-if (!empty($name)) {
+if ($user_name && $password) {
 	//⑧名前に「yse」、パスワードに「2021」と設定されているか確認する。設定されていた場合はif文の中に入る
-	if ($name=='yse' && $password=='2021'){
+	if ($user_name=='yse' && $password=='2021'){
 		//⑨SESSIONに名前を設定し、SESSIONの「login」フラグをtrueにする
 		session_name('LoginSession');
 		$_SESSION['login']=true;
