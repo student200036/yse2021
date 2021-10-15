@@ -34,15 +34,26 @@ $db_user = 'zaiko2021_yse';
 $db_password = '2021zaiko';
 $dsn = "mysql:dbname={$db_name};host={$db_host};charset=utf8;port={$db_port}";
 
+
 //⑥データベースへ接続し、接続情報を変数に保存する
-$pdo1 = new PDO($dsn, $username, $password);
+try{
+	$pdo = new PDO($dsn, $db_user, $db_password);
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+}catch (PDOException $e) {
+	echo "接続失敗" . $e->getMessage();
+}
+
 //⑦データベースで使用する文字コードを「UTF8」にする
 $dbh = new PDO("mysql:host=localhost;dbname=$dsn;", $db_user, $db_password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
-// if(/* ⑧の処理を行う */){
+if(empty($_POST['books'])){
 	//⑨SESSIONの「success」に「入荷する商品が選択されていません」と設定する。
+	$_SESSION['success'] = '入荷する商品が選択されていません';
 	//⑩在庫一覧画面へ遷移する。
-// }
+	header('Location: zaiko_itiran.php');
+	exit;
+}
 
 function getId($id,$con){
 	/* 
