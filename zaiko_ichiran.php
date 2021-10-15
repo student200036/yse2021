@@ -32,11 +32,23 @@ if($_SESSION['login'] == false){
     exit;
 }
 
-$db_connection = 'mysql';
+//$db_connection = 'mysql';
 $db_name = 'zaiko2021_yse';
 $db_host = 'localhost';
 $db_user = 'zaiko2021_yse';
 $db_password = '2021zaiko';
+$db_port = '3306';
+
+$dsn = "mysql:dbname={$db_name};host={$db_host};charset=utf8;port={$db_port}";
+
+try {
+	$pdo = new PDO($dsn,$db_user,$db_password);
+	$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
+} catch (PDOException $e) {
+	echo "接続失敗: ".$e->getMessage();
+	exit;
+}
 
 ?>
 <!DOCTYPE html>
