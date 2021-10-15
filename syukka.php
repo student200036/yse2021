@@ -56,7 +56,7 @@ if(empty($_POST['books'])){
 function getId($id,$con){
 
 	//⑪書籍を取得するSQLを作成する実行する。
-	$sql ='SELECT * FROM books';
+	$sql ="SELECT * FROM books WHERE id = $id";
 	// その際にWHERE句でメソッドの引数の$idに一致する書籍のみ取得する。
 	// SQLの実行結果を変数に保存する。
 	$stmt = $con->query($sql);
