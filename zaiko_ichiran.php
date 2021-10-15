@@ -35,8 +35,8 @@ if($_SESSION['login'] == false){
 $db_connection = 'mysql';
 $db_name = 'zaiko2021_yse';
 $db_host = 'localhost';
-$db_user = 'root';
-$db_password = '';
+$db_user = 'zaiko2021_yse';
+$db_password = '2021zaiko';
 
 ?>
 <!DOCTYPE html>
