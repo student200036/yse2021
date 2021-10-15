@@ -52,6 +52,8 @@ try {
 
 $dsn = "dbname={$db_name};host={$db_host};charset=utf8";
 
+$sql = "SELECT * FROM books";
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
