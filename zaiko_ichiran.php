@@ -50,6 +50,8 @@ try {
 	exit;
 }
 
+$dsn = "dbname={$db_name};host={$db_host};charset=utf8";
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
