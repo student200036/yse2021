@@ -80,7 +80,7 @@ function getId($id,$con){
 </head>
 <body>
 	<!-- ヘッダ -->
-	<div id
+	<div id>
 		<h1>入荷</h1>
 	</div>
 
