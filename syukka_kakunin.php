@@ -17,8 +17,9 @@ function getByid($id,$con){
 	 * その際にWHERE句でメソッドの引数の$idに一致する書籍のみ取得する。
 	 * SQLの実行結果を変数に保存する。
 	 */
-	$sql ="SELECT * FROM books WHERE {$id}";
-	$stmt = $con->query($sql);
+	$sql ="SELECT * FROM books WHERE id = :id";
+	$stmt = $con->prepare($sql);
+	$stmt->execute(['id' => $id]);
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	//③実行した結果から1レコード取得し、returnで値を返す。
 	return $result;
@@ -30,7 +31,7 @@ function updateByid($id,$con,$total){
 	 * 引数で受け取った$totalの値で在庫数を上書く。
 	 * その際にWHERE句でメソッドの引数に$idに一致する書籍のみ取得する。
 	 */
-	$sql ="UPDATE books SET stock = {$total} WHERE {$id}";
+	$sql = "UPDATE books SET stock = {$total} WHERE {$id}";
 	$stmt = $con->query($sql);
 }
 
@@ -71,7 +72,7 @@ foreach($_POST['books'] as $books){
 	 * 半角数字以外の文字が設定されていないかを「is_numeric」関数を使用して確認する。
 	 * 半角数字以外の文字が入っていた場合はif文の中に入る。
 	 */
-	$NumOfShipments = $_POST['stock'][$bookcount];
+	$NumOfShipments = $_POST['stock[]'][$bookcount];
 	if (!is_numeric($NumOfShipments)) {
 		//⑬SESSIONの「error」に「数値以外が入力されています」と設定する。
 		$_SESSION['error'] = "数値以外が入力されています";
@@ -106,7 +107,7 @@ foreach($_POST['books'] as $books){
  * ㉓POSTでこの画面のボタンの「add」に値が入ってるか確認する。
  * 値が入っている場合は中身に「ok」が設定されていることを確認する。
  */
-if(isset($_POST['add'])&& $_POST['add'] == "ok"){
+if(isset($_POST['add'])&& $_POST['add'] === 'ok'){
 	//㉔書籍数をカウントするための変数を宣言し、値を0で初期化する。
 	$bcount = 0;
 	//㉕POSTの「books」から値を取得し、変数に設定する。

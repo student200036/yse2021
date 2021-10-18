@@ -64,8 +64,9 @@ function getId($id,$con){
 	
 
 	//⑫実行した結果から1レコード取得し、returnで値を返す。
-	$sql ="SELECT * FROM books WHERE {$id}";
-	$stmt = $con->query($sql);
+	$sql ="SELECT * FROM books WHERE id = :id";
+	$stmt = $con->prepare($sql);
+	$stmt->execute(['id' => $id]);
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	return $result;
 }
@@ -102,7 +103,7 @@ function getId($id,$con){
 			 * ⑬SESSIONの「error」にメッセージが設定されているかを判定する。
 			 * 設定されていた場合はif文の中に入る。
 			 */ 
-			 if($_SESSION['error']){
+			 if(isset($_SESSION['error'])){
 				//⑭SESSIONの「error」の中身を表示する。
 				echo $_SESSION['error'];
 			 }
@@ -133,7 +134,6 @@ function getId($id,$con){
 						$book = getId($books,$pdo);
     					// ⑯「getId」関数を呼び出し、変数に戻り値を入れる。その際引数に⑮の処理で取得した値と⑥のDBの接続情報を渡す。
 					?>
-					<?php //foreach ($_POST['books'] as $book_id):?>
 					<input type="hidden" value="<?= $book['id'] ?>" name="books[]"> 
 					<tr>
 						<td><?php echo $book['id']	/* ⑱ ⑯の戻り値からidを取り出し、表示する */;?></td> 

@@ -17,8 +17,9 @@ function getByid($id,$con){
 	 * その際にWHERE句でメソッドの引数の$idに一致する書籍のみ取得する。
 	 * SQLの実行結果を変数に保存する。
 	 */
-	$sql ="SELECT * FROM books WHERE {$id}";
-	$stmt = $con->query($sql);
+	$sql ="SELECT * FROM books WHERE id = :id";
+	$stmt = $con->prepare($sql);
+	$stmt->execute(['id' => $id]);
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	//③実行した結果から1レコード取得し、returnで値を返す。
 	return $result;}
@@ -29,8 +30,9 @@ function updateByid($id,$con,$total){
 	 * 引数で受け取った$totalの値で在庫数を上書く。
 	 * その際にWHERE句でメソッドの引数に$idに一致する書籍のみ取得する。
 	 */
-	$sql ="UPDATE books SET stock = {$total} WHERE {$id}";
+	$sql ="UPDATE books SET stock = {$total} WHERE id = {$id}";
 	$stmt = $con->query($sql);
+
 }
 
 //⑤SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
@@ -110,8 +112,10 @@ if(isset($_POST['add'])&& $_POST['add'] == "ok"){
 		$book = getByid($books,$pdo);
 		//㉗ ㉖で取得した書籍の情報の「stock」と、㉔の変数を元にPOSTの「stock」から値を取り出し、足した値を変数に保存する。
 		$stockQuantity = $book['stock'];
-		$NumOfShipments = $_POST['stock'][$bookcount];		
+		$NumOfShipments = $_POST['stock[]'][$bookcount];
 		$calcResult = $stockQuantity + $NumOfShipments; 
+		var_dump($NumOfShipments);
+		exit;
 		//㉘「updateByid」関数を呼び出す。その際に引数に㉕の処理で取得した値と⑧のDBの接続情報と㉗で計算した値を渡す。
 		updateByid($books,$pdo,$calcResult);
 		//㉙ ㉔で宣言した変数をインクリメントで値を1増やす。

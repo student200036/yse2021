@@ -56,10 +56,11 @@ if(empty($_POST['books'])){
 function getId($id,$con){
 
 	//⑪書籍を取得するSQLを作成する実行する。
-	$sql ="SELECT * FROM books WHERE {$id}";
+	$sql ="SELECT * FROM books WHERE id = :id";
 	// その際にWHERE句でメソッドの引数の$idに一致する書籍のみ取得する。
 	// SQLの実行結果を変数に保存する。
-	$stmt = $con->query($sql);
+	$stmt = $con->prepare($sql);
+	$stmt->execute(['id' => $id]);
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	//⑫実行した結果から1レコード取得し、returnで値を返す。
 	return $result;
@@ -96,7 +97,7 @@ function getId($id,$con){
 		 * ⑬SESSIONの「error」にメッセージが設定されているかを判定する。
 		 * 設定されていた場合はif文の中に入る。
 		 */ 
-		if($_SESSION['error']){
+		if(isset($_SESSION['error'])){
 			//⑭SESSIONの「error」の中身を表示する。
 			echo $_SESSION['error'];
 		}

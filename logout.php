@@ -6,10 +6,8 @@
 //①セッションを開始する。
 	session_start();
 //②セッションを削除する。
-	if(isset($_SESSION['login']));
-	{
-		unset($_SESSION['login']);
-	}
+	$_SESSION = array();
+	session_destroy();
 //③ログイン画面へ遷移する。
 	header('Location: login.php');
 ?>
