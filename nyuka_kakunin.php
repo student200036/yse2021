@@ -112,7 +112,7 @@ if(isset($_POST['add'])&& $_POST['add'] == "ok"){
 		$book = getByid($books,$pdo);
 		//㉗ ㉖で取得した書籍の情報の「stock」と、㉔の変数を元にPOSTの「stock」から値を取り出し、足した値を変数に保存する。
 		$stockQuantity = $book['stock'];
-		$NumOfShipments = $_POST['stock[]'][$bookcount];
+		$NumOfShipments = $_POST['stock'][$bcount];
 		$calcResult = $stockQuantity + $NumOfShipments; 
 		var_dump($NumOfShipments);
 		exit;

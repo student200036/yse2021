@@ -116,7 +116,7 @@ if(isset($_POST['add'])&& $_POST['add'] === 'ok'){
 		$book = getByid($books,$pdo);
 		//㉗ ㉖で取得した書籍の情報の「stock」と、㉔の変数を元にPOSTの「stock」から値を取り出して書籍情報の「stock」から値を引いた値を変数に保存する。
 		$stockQuantity = $book['stock'];
-		$NumOfShipments = $_POST['stock'][$bookcount];		
+		$NumOfShipments = $_POST['stock'][$bcount];		
 		$calcResult = $stockQuantity - $NumOfShipments; 
 		//㉘「updateByid」関数を呼び出す。その際に引数に㉕の処理で取得した値と⑧のDBの接続情報と㉗で計算した値を渡す。
 		updateByid($books,$pdo,$calcResult);
