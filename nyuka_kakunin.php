@@ -114,8 +114,6 @@ if(isset($_POST['add'])&& $_POST['add'] == "ok"){
 		$stockQuantity = $book['stock'];
 		$NumOfShipments = $_POST['stock'][$bcount];
 		$calcResult = $stockQuantity + $NumOfShipments; 
-		var_dump($NumOfShipments);
-		exit;
 		//㉘「updateByid」関数を呼び出す。その際に引数に㉕の処理で取得した値と⑧のDBの接続情報と㉗で計算した値を渡す。
 		updateByid($books,$pdo,$calcResult);
 		//㉙ ㉔で宣言した変数をインクリメントで値を1増やす。
