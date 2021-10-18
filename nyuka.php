@@ -64,10 +64,10 @@ function getId($id,$con){
 	
 
 	//⑫実行した結果から1レコード取得し、returnで値を返す。
-	if(!$id) return;
-	$sql = "SELECT * FROM books WHILE id = {$id}";
-	$row = $con->query($sql)->fetch(PDO::FETCH_ASSOC);
-	return $row;
+	$sql ="SELECT * FROM books WHERE {$id}";
+	$stmt = $con->query($sql);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	return $result;
 }
 
 ?>
@@ -75,12 +75,12 @@ function getId($id,$con){
 <html lang="ja">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>入荷</title>="header">
+	<title>入荷</title>
 	<link rel="stylesheet" href="css/ichiran.css" type="text/css" />
 </head>
 <body>
 	<!-- ヘッダ -->
-	<div id>
+	<div id="header">
 		<h1>入荷</h1>
 	</div>
 

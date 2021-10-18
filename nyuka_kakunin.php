@@ -69,7 +69,7 @@ foreach($_POST['books'] as $books){
 	 * 半角数字以外の文字が入っていた場合はif文の中に入る。
 	 */
 	$NumOfShipments = $_POST['stock'][$bookcount];
-	if (is_numeric($NumOfShipments)) {
+	if (!is_numeric($NumOfShipments)) {
 		//⑬SESSIONの「error」に「数値以外が入力されています」と設定する。
 		$_SESSION['error'] = "数値以外が入力されています";
 		//⑭「include」を使用して「nyuka.php」を呼び出す。
