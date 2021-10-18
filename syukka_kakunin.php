@@ -72,7 +72,7 @@ foreach($_POST['books'] as $books){
 	 * 半角数字以外の文字が設定されていないかを「is_numeric」関数を使用して確認する。
 	 * 半角数字以外の文字が入っていた場合はif文の中に入る。
 	 */
-	$NumOfShipments = $_POST['stock[]'][$bookcount];
+	$NumOfShipments = $_POST['stock'][$bookcount];
 	if (!is_numeric($NumOfShipments)) {
 		//⑬SESSIONの「error」に「数値以外が入力されています」と設定する。
 		$_SESSION['error'] = "数値以外が入力されています";
