@@ -22,7 +22,8 @@ function getByid($id,$con){
 	$stmt->execute(['id' => $id]);
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	//③実行した結果から1レコード取得し、returnで値を返す。
-	return $result;}
+	return $result;
+}
 
 function updateByid($id,$con,$total){
 	/*
@@ -32,7 +33,6 @@ function updateByid($id,$con,$total){
 	 */
 	$sql ="UPDATE books SET stock = {$total} WHERE id = {$id}";
 	$stmt = $con->query($sql);
-
 }
 
 //⑤SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
@@ -84,7 +84,7 @@ foreach($_POST['books'] as $books){
 	$book = getByid($books,$pdo);
 	//⑰ ⑯で取得した書籍の情報の「stock」と、⑩の変数を元にPOSTの「stock」から値を取り出し、足した値を変数に保存する。
 	$stockQuantity = $book['stock'];
-	$calcResult = $stockQuantity - $NumOfShipments; 
+	$calcResult = $stockQuantity + $NumOfShipments; 
 	//⑱ ⑰の値が100を超えているか判定する。超えていた場合はif文の中に入る。
 	if($calcResult > 100){
 		//⑲SESSIONの「error」に「最大在庫数を超える数は入力できません」と設定する。
