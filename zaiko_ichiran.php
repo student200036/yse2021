@@ -74,7 +74,7 @@ $stmt = $pdo->query($sql);
 			<div id="left">
 				<p id="ninsyou_ippan">
 					<?php
-						//echo @$_SESSION["account_name"];
+						echo $_SESSION["account_name"];
 					?><br>
 					<button type="button" id="logout" onclick="location.href='logout.php'">ログアウト</button>
 				</p>
