@@ -76,7 +76,7 @@ if ($user_name && $password) {
 		echo "<div id='error'>",$error_message, "</div>";
 		
 		//⑯メッセージの変数に入っている値を表示する
-		echo "<div id='msg'>", $message, "</div>";
+		echo "<div id='error'>", $message, "</div>";
 		?>
 		<form action="login.php" method="post" id="log">
 			<p>
