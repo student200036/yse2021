@@ -43,6 +43,10 @@ if (!$_SESSION['login']){
 	header('Location: login.php');
 }
 
+if(!isset($_POST['books'])){
+	header('Location: zaiko_ichiran.php');
+}
+
 //⑧データベースへ接続し、接続情報を変数に保存する
 $db_name = 'zaiko2021_yse';
 $db_host = 'localhost';
