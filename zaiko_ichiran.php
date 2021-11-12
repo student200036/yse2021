@@ -22,7 +22,6 @@ if ($_SESSION['login'] == false){
 }
 
 //⑤データベースへ接続し、接続情報を変数に保存する
-//$db_connection = 'mysql';
 $db_name = 'zaiko2021_yse';
 $db_host = 'localhost';
 $db_user = 'zaiko2021_yse';
@@ -30,7 +29,6 @@ $db_password = '2021zaiko';
 $db_port = '3306';
 //⑥データベースで使用する文字コードを「UTF8」にする
 $dsn = "mysql:dbname={$db_name};host={$db_host};charset=utf8;port={$db_port}";
-//$dsn = "dbname={$db_name};host={$db_host};charset=utf8";
 try {
 	$pdo = new PDO($dsn,$db_user,$db_password);
 	$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
